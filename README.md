@@ -131,7 +131,7 @@ $ ybdata convert fixtures/mydata
 
 By default this will create a package in `uploads/mydata.zip` and update the `uploads/manifest.json` with the package and signature information. Note if you're updating a previously created dataset, you can use the `-f` flag to overwrite the old data and create a new package.
 
-Finally upload the datasets to our S3 storage in the cloud. You will need proper AWS access keys to do this (see the environment or aws-configure options). If you would like to upload the datasets elsewhere, use the `--url` flag.
+Finally upload the datasets to our S3 storage in the cloud. You will need proper AWS access keys to do this (see the environment or aws-configure options). If you would like to upload the datasets elsewhere, use the `--bucket` flag.
 
 ```
 $ ybdata upload --pending v1.0

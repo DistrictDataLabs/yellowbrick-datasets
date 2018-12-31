@@ -45,3 +45,11 @@ def sha256sum(path, blocksize=65536):
             sig.update(buf)
             buf = f.read(blocksize)
     return sig.hexdigest()
+
+
+def urljoin(*args):
+    """
+    Joins given arguments into an url. Trailing but not leading slashes are
+    stripped for each argument.
+    """
+    return "/".join(map(lambda x: str(x).rstrip('/'), args))
