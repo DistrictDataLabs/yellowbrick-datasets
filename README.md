@@ -3,6 +3,20 @@
 
 Yellowbrick datasets are hosted in an S3 drive in the cloud to allow easy access to the data for examples. This repository manages those datasets, their data structure, and interactions with the cloud.
 
+## Getting Started
+
+The `ybdata` script is installed as an entry point in `setup.py`. You can install the package and the script using `pip install yellowbrick-data`. If you've downloaded the source code from GitHub you can install the app using editable mode with pip. In the current working directory of the project, use:
+
+```
+$ pip install -e .
+```
+
+At this point you should have a `ybdata` command on your `$PATH`. Like git, this utility has many subcommands for various data related management tasks. To see a list of the commands and their descriptions:
+
+```
+$ ybdata --help
+```
+
 ## Datasets Basics
 
 All datasets must have the following properties:

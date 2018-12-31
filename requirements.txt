@@ -1,0 +1,12 @@
+## App Requirements
+commis==0.4
+tabulate==0.8.2
+tqdm==4.28.1
+
+## Third-Party Dependencies
+#colorama==0.3.6
+
+## Python Tools (uncomment for deployment)
+#pip==18.1
+#setuptools==40.6.3
+#wheel==0.32.3
