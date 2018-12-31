@@ -1,3 +1,6 @@
+# Datasets and fixtures
+fixtures/*.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
