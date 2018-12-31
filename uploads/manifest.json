@@ -1,0 +1,10 @@
+{
+  "bikeshare": {
+    "url": "bikeshare.zip",
+    "signature": "4ed07a929ccbe0171309129e6adda1c4390190385dd6001ba9eecc795a21eef2"
+  },
+  "hobbies": {
+    "url": "hobbies.zip",
+    "signature": "6114e32f46baddf049a18fb05bad3efa98f4e6a0fe87066c94071541cb1e906f"
+  }
+}

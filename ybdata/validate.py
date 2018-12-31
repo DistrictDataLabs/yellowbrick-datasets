@@ -20,18 +20,51 @@ import os
 import json
 
 from glob import glob
+from .utils import exists_in_dataset
 
 
 ##########################################################################
 ## Utilities
 ##########################################################################
 
-def exists_in_dataset(root, *path):
+def is_valid(path, raise_for_invalid=False):
     """
-    Checks if the specified path (joined by os-specific sep) exists in the
-    path specified by the root directory.
+    Checks if a path is a valid dataset.
     """
-    return os.path.exists(os.path.join(root, *path))
+    if not os.path.exists(path) or not os.path.isdir(path):
+        if raise_for_invalid:
+            raise ValueError("{} is not a directory".format(path))
+        return False
+
+    if is_valid_standard(path, False):
+        return True
+
+    if is_valid_corpus(path, False):
+        return True
+
+    if raise_for_invalid:
+        raise ValueError("cannot validate dataset at '{}'".format(path))
+    return False
+
+
+def is_valid_standard(path, raise_for_invalid=False):
+    """
+    Returns True if the standard dataset is valid and ready for upload.
+    """
+    valid = all(standard_package_checklist(path, include_optional=False).values())
+    if raise_for_invalid and not valid:
+        raise ValueError("The dataset at '{}' is not valid".format(path))
+    return valid
+
+
+def is_valid_corpus(path, raise_for_invalid=False):
+    """
+    Returns True if the corpus dataset is valid and ready for upload.
+    """
+    valid = all(corpus_package_checklist(path, include_optional=False).values())
+    if raise_for_invalid and not valid:
+        raise ValueError("The corpus at '{}' is not valid".format(path))
+    return valid
 
 
 def standard_package_checklist(path, include_optional=False):
@@ -52,7 +85,7 @@ def standard_package_checklist(path, include_optional=False):
     checklist : dict
         Maps checklist items to bools if they are checked or not
     """
-    name = os.path.basename(path)
+    name = os.path.basename(path.rstrip(os.path.sep))
 
     # Base Checklist
     checklist = {
@@ -91,16 +124,6 @@ def standard_package_checklist(path, include_optional=False):
     return checklist
 
 
-def is_valid_standard(path, raise_for_invalid=False):
-    """
-    Returns True if the standard dataset is valid and ready for upload.
-    """
-    valid = all(standard_package_checklist(path, include_optional=False).values())
-    if raise_for_invalid and not valid:
-        raise ValueError("The dataset at '{}' is not valid".format(path))
-    return valid
-
-
 def corpus_package_checklist(path, include_optional=False):
     """
     Given the path to a dataset directory, return a dictionary checklist of
@@ -132,13 +155,3 @@ def corpus_package_checklist(path, include_optional=False):
         })
 
     return checklist
-
-
-def is_valid_corpus(path, raise_for_invalid=False):
-    """
-    Returns True if the corpus dataset is valid and ready for upload.
-    """
-    valid = all(corpus_package_checklist(path, include_optional=False).values())
-    if raise_for_invalid and not valid:
-        raise ValueError("The corpus at '{}' is not valid".format(path))
-    return valid
