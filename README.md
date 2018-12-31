@@ -33,7 +33,7 @@ Currently there are two kinds of datasets:
 1. Standard: A single data table containing both features and targets.
 2. Corpus: A text corpus for natural language processing.
 
-Both kinds of datasets have their own specific package structures as defined in the following sections.
+Both kinds of datasets have their own specific package structures as defined in the following sections. Note that the `ybdata validate` command can be used to check if a dataset is ready to be uploaded.
 
 ### Standard Datasets
 
@@ -95,6 +95,8 @@ labels = [os.path.basename(os.path.dirname(path)) for path in documents]
 ```
 
 Documents and labels can then be directly passed to scikit-learn text feature extraction transformers for analysis.
+
+## Uploading Datasets
 
 ## Creating Datasets
 
