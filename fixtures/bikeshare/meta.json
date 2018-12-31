@@ -1,0 +1,21 @@
+{
+  "features": [
+    "season",
+    "year",
+    "month",
+    "hour",
+    "holiday",
+    "weekday",
+    "workingday",
+    "weather",
+    "temp",
+    "feelslike",
+    "humidity",
+    "windspeed"
+  ],
+  "target": "riders",
+  "alternate_targets": [
+    "casual",
+    "registered"
+  ]
+}

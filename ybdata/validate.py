@@ -17,6 +17,8 @@ Helper functions and checks for performing validation on a dataset.
 ##########################################################################
 
 import os
+import json
+
 from glob import glob
 
 
@@ -52,6 +54,7 @@ def standard_package_checklist(path, include_optional=False):
     """
     name = os.path.basename(path)
 
+    # Base Checklist
     checklist = {
         "has readme": exists_in_dataset(path, "README.md"),
         "has metadata": exists_in_dataset(path, "meta.json"),
@@ -64,16 +67,37 @@ def standard_package_checklist(path, include_optional=False):
             "has citation": exists_in_dataset(path, "citation.bib")
         })
 
+    # Metadata checklist
+    if exists_in_dataset(path, "meta.json"):
+        with open(os.path.join(path, "meta.json")) as f:
+            try:
+                meta = json.load(f)
+                checklist["meta is valid json"] = True
+            except:
+                meta = {}
+                checklist["meta is valid json"] = False
+
+        checklist.update({
+            "meta has features": "features" in meta,
+            "meta has target": "target" in meta,
+        })
+
+        if include_optional:
+            checklist.update({
+                "meta has class labels": "labels" in meta,
+                "meta has alternate targets": "alternate_targets" in meta,
+            })
+
     return checklist
 
 
-def is_valid_standard(path, raise_for_invalid):
+def is_valid_standard(path, raise_for_invalid=False):
     """
     Returns True if the standard dataset is valid and ready for upload.
     """
     valid = all(standard_package_checklist(path, include_optional=False).values())
     if raise_for_invalid and not valid:
-        raise ValueError("The dataset at '%s' is not valid".format(path))
+        raise ValueError("The dataset at '{}' is not valid".format(path))
     return valid
 
 
@@ -95,8 +119,6 @@ def corpus_package_checklist(path, include_optional=False):
     checklist : dict
         Maps checklist items to bools if they are checked or not
     """
-    name = os.path.basename(path)
-
     checklist = {
         "has readme": exists_in_dataset(path, "README.md"),
         "has subdirectory categories": all([os.path.isdir(p) for p in glob(os.path.join(path, "*")) if not p.endswith(".md")]),
@@ -112,11 +134,11 @@ def corpus_package_checklist(path, include_optional=False):
     return checklist
 
 
-def is_valid_corpus(path, raise_for_invalid):
+def is_valid_corpus(path, raise_for_invalid=False):
     """
     Returns True if the corpus dataset is valid and ready for upload.
     """
     valid = all(corpus_package_checklist(path, include_optional=False).values())
     if raise_for_invalid and not valid:
-        raise ValueError("The corpus at '%s' is not valid".format(path))
+        raise ValueError("The corpus at '{}' is not valid".format(path))
     return valid

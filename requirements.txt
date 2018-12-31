@@ -1,10 +1,15 @@
 ## App Requirements
 commis==0.4
+numpy==1.15.4
+pandas==0.23.4
 tabulate==0.8.2
 tqdm==4.28.1
 
 ## Third-Party Dependencies
 #colorama==0.3.6
+#python-dateutil==2.7.5
+#pytz==2018.7
+#six==1.12.0
 
 ## Python Tools (uncomment for deployment)
 #pip==18.1

@@ -17,6 +17,7 @@ Subcommand definitions executed by the utility program.
 ##########################################################################
 
 from .validate import ValidateCommand
+from .convert import ConvertCommand
 
 
 ##########################################################################
@@ -25,5 +26,5 @@ from .validate import ValidateCommand
 
 # Commands become available to the command-line if added to this list.
 COMMANDS = [
-    ValidateCommand
+    ValidateCommand, ConvertCommand,
 ]
