@@ -1,0 +1,9 @@
+{
+    "features": [
+        "timestep",
+        "x acceleration",
+        "y acceleration",
+        "z acceleration"
+    ],
+    "target": "walker"
+}

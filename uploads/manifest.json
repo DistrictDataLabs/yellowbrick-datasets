@@ -34,5 +34,9 @@
   "spam": {
     "url": "spam.zip",
     "signature": "000309ac2b61090a3001de3e262a5f5319708bb42791c62d15a08a2f9f7cb30a"
+  },
+  "walking": {
+    "url": "walking.zip",
+    "signature": "7a36615978bc3bb74a2e9d5de216815621bd37f6a42c65d3fc28b242b4d6e040"
   }
 }
