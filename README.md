@@ -96,10 +96,45 @@ labels = [os.path.basename(os.path.dirname(path)) for path in documents]
 
 Documents and labels can then be directly passed to scikit-learn text feature extraction transformers for analysis.
 
-## Uploading Datasets
+## Creating and Uploading Datasets
 
-## Creating Datasets
+This section outlines how to create and upload a dataset for use in Yellowbrick examples and testing. More detailed steps follow, but in brief here is a sketch required for the actions to take to package a dataset:
 
-This section to be completed in more detail.
+1. Create a dataset in `fixtures/`
+2. Convert dataset to all appropriate types using `ybdata convert`
+3. Validate the dataset is ready using `ybdata validate`
+4. Package the dataset using `ybdata package`
+5. Upload the dataset using `ybdata upload`
+6. Update `yellowbrick.datasets` with `uploads/manifest.json`
 
-Most of the datasets in this repository are from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php). Until this section is completed, I recommend looking at one of the datasets as an example to see how to transform the data from the source repository to one that Yellowbrick can make direct use of.
+Most of the datasets in this repository are from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php). A basic methodology for creating a repository is to use the unique name of the UCIML Repository as the unique name of the data set to store in `fixtures/`. Wrangle the data so that it exists as a pandas-readable CSV file with a header row (usually by joining the target with the features or extracting data from a TSV, etc). Make sure that the CSV is gzip-compressed when done!
+
+Once the pandas CSV file is created, create the README.md, meta.json, and citation.bib files manually. It is usually also fairly simple to copy and paste the README.md from the UCIML page description (wrangling it where necessary to include as many details as possible).  The citation.bib file can be found by searching with Google Scholar and selecting "cite as bibtex". The meta.json usually has to be manually written. Once done, you can convert the CSV into the `.npz` objects using `ybdata convert` as follows:
+
+```
+$ ybdata convert fixtures/mydata/mydata.csv.gz fixtures/mydata/mydata.npz
+```
+
+Note that you can go from .npz to csv.gz asa well, but it is usually easier to go in the reverse direction when wrangling.
+
+Once done, validate that the dataset is ready to be packaged using:
+
+```
+$ ybdata validate fixtures/mydata
+```
+
+This should print out a table of both required and optional items for validation, and the validation status should be listed at the bottom. Once validated, convert the dataset into a package:
+
+```
+$ ybdata convert fixtures/mydata
+```
+
+By default this will create a package in `uploads/mydata.zip` and update the `uploads/manifest.json` with the package and signature information. Note if you're updating a previously created dataset, you can use the `-f` flag to overwrite the old data and create a new package.
+
+Finally upload the datasets to our S3 storage in the cloud. You will need proper AWS access keys to do this (see the environment or aws-configure options). If you would like to upload the datasets elsewhere, use the `--url` flag.
+
+```
+$ ybdata upload --pending v1.0
+```
+
+The upload process also updates the `uploads/manifold.json` with the final download URL and in a format that can be added to the Yellowbrick library. Make sure the yellowbrick library is updated in the correct Yellowbrick version, otherwise YB downloads will fail!

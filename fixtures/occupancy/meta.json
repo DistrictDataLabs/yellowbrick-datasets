@@ -1,0 +1,14 @@
+{
+  "features": [
+      "temperature",
+      "relative humidity",
+      "light",
+      "CO2",
+      "humidity"
+  ],
+  "target": "occupancy",
+  "labels": {
+    "occupied": 1,
+    "not occupied": 0
+  }
+}

@@ -1,0 +1,17 @@
+{
+    "features": [
+        "relative compactness",
+        "surface area",
+        "wall area",
+        "roof area",
+        "overall height",
+        "orientation",
+        "glazing area",
+        "glazing area distribution"
+    ],
+    "target": "heating load",
+    "alternate_targets": [
+        "heating load",
+        "cooling load"
+    ]
+}

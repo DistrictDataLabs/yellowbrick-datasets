@@ -77,7 +77,7 @@ class ConvertCommand(Command):
         if dtype == ".npz":
             # Save as numpy compressed
             np.savez_compressed(args.dst, X=X, y=y)
-        if dtype.startswith(".csv"):
+        elif dtype.startswith(".csv"):
             # Save as pandas data frame
             df = pd.concat([pd.DataFrame(X), pd.Series(y)], axis=1)
             meta = self.load_meta(args.src)
@@ -110,7 +110,7 @@ class ConvertCommand(Command):
         """
         Convert a pandas data frame into X, y for saving to numpy
         """
-        meta = self.load_meta()
+        meta = self.load_meta(path)
         compression = "gzip" if path.endswith(".gz") else None
         data = pd.read_csv(path, compression=compression)
         return data[meta["features"]], data[meta["target"]]

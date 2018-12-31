@@ -1,0 +1,32 @@
+{
+  "features": [
+    "limit",
+    "sex",
+    "edu",
+    "married",
+    "age",
+    "apr_delay",
+    "may_delay",
+    "jun_delay",
+    "jul_delay",
+    "aug_delay",
+    "sep_delay",
+    "apr_bill",
+    "may_bill",
+    "jun_bill",
+    "jul_bill",
+    "aug_bill",
+    "sep_bill",
+    "apr_pay",
+    "may_pay",
+    "jun_pay",
+    "jul_pay",
+    "aug_pay",
+    "sep_pay"
+  ],
+  "target": "default",
+  "labels": {
+    "1": "default payment",
+    "0": "no default payment"
+  }
+}

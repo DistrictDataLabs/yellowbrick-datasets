@@ -18,6 +18,8 @@ Helper functions and checks for performing validation on a dataset.
 
 import os
 import json
+import numpy as np
+import pandas as pd
 
 from glob import glob
 from .utils import exists_in_dataset
@@ -120,6 +122,30 @@ def standard_package_checklist(path, include_optional=False):
                 "meta has class labels": "labels" in meta,
                 "meta has alternate targets": "alternate_targets" in meta,
             })
+    else:
+        meta = None
+
+    # Data match checking (e.g. same shapes)
+    if meta and exists_in_dataset(path, name+".csv.gz") and exists_in_dataset(path, name+".npz"):
+        # Check numpy data structures
+        nf = np.load(os.path.join(path, name+".npz"))
+        X, y = nf.get("X"), nf.get("y")
+
+        checklist.update({
+            ".npz file has X": X is not None,
+            ".npz file has y": y is not None,
+            ".npz X and y shapes match": X.shape[0] == y.shape[0],
+            ".npz X has same number cols as features": X.shape[1] == len(meta.get("features", [])),
+        })
+
+        # Check pandas
+        df = pd.read_csv(os.path.join(path, name+".csv.gz"), compression="gzip")
+        checklist.update({
+            "DataFrame contains target": meta.get("target", "") in df.columns,
+            "DataFrame contains features": all([feat in df.columns for feat in meta.get("features", [])]),
+            "DataFrame has same rows as X": X.shape[0] == df.shape[0],
+        })
+
 
     return checklist
 
