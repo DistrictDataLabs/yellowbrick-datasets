@@ -115,7 +115,7 @@ class UploadCommand(Command):
             dst = urljoin(s3path, file)
 
             # Upload using boto3
-            s3.upload_file(src, args.bucket, dst)
+            s3.upload_file(src, args.bucket, dst, ExtraArgs={'ACL':'public-read'})
 
             # Update the manifold
             manifest[dataset]["url"] = urljoin(s3url, file)
