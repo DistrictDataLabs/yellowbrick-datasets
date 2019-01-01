@@ -4,15 +4,15 @@ include *.txt
 include *.yml
 include *.cfg
 include Makefile
-recursive-include docs *.rst
-recursive-include docs *.jpg
-recursive-include docs *.png
-recursive-include docs *.py
-recursive-include docs Makefile
-recursive-include tests *.py
-recursive-include uploads *.zip
-recursive-include uploads *.tgz
-recursive-include uploads *.json
-recursive-include fixtures *.gz
-recursive-include fixtures *.md
-recursive-include fixtures *.json
+include MANIFEST.in
+
+graft fixtures
+graft uploads
+recursive-exclude fixtures *.csv *.txt *tsv
+
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude .ipynb_checkpoints
+global-exclude .DS_Store
+global-exclude .env
+global-exclude .coverage.*

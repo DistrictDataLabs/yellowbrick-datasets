@@ -32,7 +32,7 @@ from setuptools import find_packages
 NAME         = "yellowbrick-datasets"
 DESCRIPTION  = "Yellowbrick datasets management and deployment scripts."
 AUTHOR       = "Rebecca Bilbro, Benjamin Bengfort"
-EMAIL        = "info@districtdatalabs.com"
+EMAIL        = "yellowbrick@googlegroups.com"
 MAINTAINER   = "Benjamin Bengfort"
 LICENSE      = "Apache 2"
 REPOSITORY   = "https://github.com/districtdatalabs/yellowbrick-datasets"
@@ -112,6 +112,7 @@ config = {
     "version": get_version(),
     "description": DESCRIPTION,
     "long_description": read(PKG_DESCRIBE),
+    "long_description_content_type": "text/markdown",
     "license": LICENSE,
     "author": AUTHOR,
     "author_email": EMAIL,
@@ -129,7 +130,7 @@ config = {
             "ybdata = ybdata.__main__:main"
         ],
     },
-    "scripts": [],
+    "python_requires": ">=3.4",
     "setup_requires":[],
     "tests_require":[],
 }
