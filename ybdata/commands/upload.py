@@ -40,7 +40,7 @@ BUCKET = "ddl-data-lake"
 class UploadCommand(Command):
 
     name = "upload"
-    help = "upload datasets to S3 and update manifold"
+    help = "upload datasets to S3 and update manifest"
     args = {
         ("-b", "--bucket"): {
             "default": BUCKET, "help": "s3 bucket to upload data to",
@@ -55,7 +55,7 @@ class UploadCommand(Command):
         },
         ("-p", "--pending"): {
             "action": "store_true", "default": False,
-            "help": "upload pending datasets with no URL in manifold",
+            "help": "upload pending datasets with no URL in manifest",
         },
         ("-s", "--single"): {
             "type": str, "metavar": "PATH",
@@ -68,7 +68,7 @@ class UploadCommand(Command):
 
     def handle(self, args):
         """
-        Verify datasets and update manifold.json
+        Verify datasets and update manifest.json
         """
         version = args.version.lower()
         if not version.startswith("v"):
@@ -82,12 +82,12 @@ class UploadCommand(Command):
         if sum([args.pending, args.all, bool(args.single)]) != 1:
             raise ConsoleError("specify one of --pending --all or --single")
 
-        # Load manifold
+        # Load manifest
         try:
             with open(os.path.join(args.uploads, "manifest.json")) as f:
                 manifest = json.load(f)
         except Exception as e:
-            raise ConsoleError("could not load manifold: {}".format(e))
+            raise ConsoleError("could not load manifest: {}".format(e))
 
         # Determine datasets to upload
         s3path = urljoin("yellowbrick", version)
@@ -105,7 +105,7 @@ class UploadCommand(Command):
             else:
                 raise ConsoleError("no dataset named '{}' in manifest.json".format(args.single))
 
-        # Upload the datasets to S3 and update the manifold
+        # Upload the datasets to S3 and update the manifest
         s3 = boto3.client('s3')
         for dataset in datasets:
             # Figure out where the upload goes to
@@ -117,7 +117,7 @@ class UploadCommand(Command):
             # Upload using boto3
             s3.upload_file(src, args.bucket, dst, ExtraArgs={'ACL':'public-read'})
 
-            # Update the manifold
+            # Update the manifest with S3 url
             manifest[dataset]["url"] = urljoin(s3url, file)
 
         # Write the manifest back to disk

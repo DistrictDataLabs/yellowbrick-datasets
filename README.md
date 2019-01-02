@@ -137,4 +137,4 @@ Finally upload the datasets to our S3 storage in the cloud. You will need proper
 $ ybdata upload --pending v1.0
 ```
 
-The upload process also updates the `uploads/manifold.json` with the final download URL and in a format that can be added to the Yellowbrick library. Make sure the yellowbrick library is updated in the correct Yellowbrick version, otherwise YB downloads will fail!
+The upload process also updates the `uploads/manifest.json` with the final download URL and in a format that can be added to the Yellowbrick library. Make sure the yellowbrick library is updated in the correct Yellowbrick version, otherwise YB downloads will fail!
