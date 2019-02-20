@@ -37,6 +37,10 @@ class ConvertCommand(Command):
     name = "convert"
     help = "convert dataset into required format"
     args = {
+        ("-d", "--dtype"): {
+            "default": None, "metavar": "T", "type": str,
+            "help": "convert to type (one of `biufcmMOSUV`) when dst is npz",
+        },
         "src": {
             "type": str, "metavar": "src",
             "help": "path to dataset source file to convert",
@@ -44,7 +48,7 @@ class ConvertCommand(Command):
         "dst": {
             "type": str, "metavar": "dst",
             "help": "path to write converted dataset to",
-        }
+        },
     }
 
     def handle(self, args):
@@ -75,8 +79,14 @@ class ConvertCommand(Command):
 
         # Perform the conversion and save
         if dtype == ".npz":
+            # Convert to the appropriate array type
+            if args.X_dtype is not None:
+                X = X.astype(args.X_dtype)
+            if args.y_dtype is not None:
+                y = y.astype(args.y_dtype)
+
             # Save as numpy compressed
-            np.savez_compressed(args.dst, X=X, y=y)
+            np.savez_compressed(args.dst, X=X, y=y, allow_pickle=False)
         elif dtype.startswith(".csv"):
             # Save as pandas data frame
             df = pd.concat([pd.DataFrame(X), pd.Series(y)], axis=1)
