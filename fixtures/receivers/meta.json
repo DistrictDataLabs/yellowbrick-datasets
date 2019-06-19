@@ -1,0 +1,30 @@
+{
+  "features": [
+    "Player",
+    "Id",
+    "Tm",
+    "Age",
+    "Pos",
+    "G",
+    "GS",
+    "Tgt",
+    "Rec",
+    "Ctch_Rate",
+    "Yds",
+    "Y/R",
+    "TD",
+    "Lng",
+    "Y/Tgt",
+    "R/G",
+    "Y/G",
+    "Fmb"
+  ],
+  "target": "ProBowl",
+  "labels": {
+      "yes": 1,
+      "no": 0
+  },
+  "alternate_targets": [
+    "FirstTeamAllPro"
+  ]
+}

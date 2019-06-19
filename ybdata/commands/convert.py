@@ -80,9 +80,9 @@ class ConvertCommand(Command):
         # Perform the conversion and save
         if dtype == ".npz":
             # Convert to the appropriate array type
-            if args.X_dtype is not None:
+            if hasattr(args, 'X_dtype'):
                 X = X.astype(args.X_dtype)
-            if args.y_dtype is not None:
+            if hasattr(args, 'y_dtype'):
                 y = y.astype(args.y_dtype)
 
             # Save as numpy compressed
