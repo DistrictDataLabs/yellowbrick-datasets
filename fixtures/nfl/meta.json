@@ -1,10 +1,6 @@
 {
   "features": [
-    "Player",
-    "Id",
-    "Tm",
     "Age",
-    "Pos",
     "G",
     "GS",
     "Tgt",
@@ -17,7 +13,16 @@
     "Y/Tgt",
     "R/G",
     "Y/G",
-    "Fmb"
+    "Fmb",
+    "C_pos",
+    "CB_pos",
+    "DT_pos",
+    "FB_pos",
+    "QB_pos",
+    "RB_pos",
+    "T_pos",
+    "TE_pos",
+    "WR_pos"
   ],
   "target": "ProBowl",
   "labels": {
@@ -26,5 +31,10 @@
   },
   "alternate_targets": [
     "FirstTeamAllPro"
+  ],
+  "extra_text_fields": [
+      "Player",
+      "Id",
+      "Tm"
   ]
 }

@@ -37,9 +37,13 @@ class ConvertCommand(Command):
     name = "convert"
     help = "convert dataset into required format"
     args = {
-        ("-d", "--dtype"): {
+        ("-X", "--X-dtype"): {
             "default": None, "metavar": "T", "type": str,
-            "help": "convert to type (one of `biufcmMOSUV`) when dst is npz",
+            "help": "convert X to type (one of `biufcmMOSUV`) when dst is npz",
+        },
+        ("-y", "--y-dtype"): {
+            "default": None, "metavar": "T", "type": str,
+            "help": "convert y to type (one of `biufcmMOSUV`) when dst is npz",
         },
         "src": {
             "type": str, "metavar": "src",
@@ -80,9 +84,9 @@ class ConvertCommand(Command):
         # Perform the conversion and save
         if dtype == ".npz":
             # Convert to the appropriate array type
-            if hasattr(args, 'X_dtype'):
+            if args.X_dtype is not None:
                 X = X.astype(args.X_dtype)
-            if hasattr(args, 'y_dtype'):
+            if args.y_dtype is not None:
                 y = y.astype(args.y_dtype)
 
             # Save as numpy compressed

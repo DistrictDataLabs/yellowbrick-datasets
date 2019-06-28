@@ -128,7 +128,7 @@ def standard_package_checklist(path, include_optional=False):
     # Data match checking (e.g. same shapes)
     if meta and exists_in_dataset(path, name+".csv.gz") and exists_in_dataset(path, name+".npz"):
         # Check numpy data structures
-        nf = np.load(os.path.join(path, name+".npz"), allow_pickle=True)
+        nf = np.load(os.path.join(path, name+".npz"), allow_pickle=False)
         X, y = nf.get("X"), nf.get("y")
 
         checklist.update({
