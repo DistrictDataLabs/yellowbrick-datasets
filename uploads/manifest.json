@@ -38,5 +38,9 @@
   "walking": {
     "url": "https://s3.amazonaws.com/ddl-data-lake/yellowbrick/v1.0/walking.zip",
     "signature": "7a36615978bc3bb74a2e9d5de216815621bd37f6a42c65d3fc28b242b4d6e040"
+  },
+  "nfl": {
+    "url": "nfl.zip",
+    "signature": "e2d0665ed4fd7bea866ba6d2f0035fce89e6143da3c12dcd870e67319451a382"
   }
 }

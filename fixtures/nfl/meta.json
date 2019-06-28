@@ -1,0 +1,40 @@
+{
+  "features": [
+    "Age",
+    "G",
+    "GS",
+    "Tgt",
+    "Rec",
+    "Ctch_Rate",
+    "Yds",
+    "Y/R",
+    "TD",
+    "Lng",
+    "Y/Tgt",
+    "R/G",
+    "Y/G",
+    "Fmb",
+    "C_pos",
+    "CB_pos",
+    "DT_pos",
+    "FB_pos",
+    "QB_pos",
+    "RB_pos",
+    "T_pos",
+    "TE_pos",
+    "WR_pos"
+  ],
+  "target": "ProBowl",
+  "labels": {
+      "yes": 1,
+      "no": 0
+  },
+  "alternate_targets": [
+    "FirstTeamAllPro"
+  ],
+  "extra_text_fields": [
+      "Player",
+      "Id",
+      "Tm"
+  ]
+}
