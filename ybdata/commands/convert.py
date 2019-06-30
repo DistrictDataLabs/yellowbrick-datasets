@@ -37,9 +37,13 @@ class ConvertCommand(Command):
     name = "convert"
     help = "convert dataset into required format"
     args = {
-        ("-d", "--dtype"): {
+        ("-X", "--X-dtype"): {
             "default": None, "metavar": "T", "type": str,
-            "help": "convert to type (one of `biufcmMOSUV`) when dst is npz",
+            "help": "convert X to type (one of `biufcmMOSUV`) when dst is npz",
+        },
+        ("-y", "--y-dtype"): {
+            "default": None, "metavar": "T", "type": str,
+            "help": "convert y to type (one of `biufcmMOSUV`) when dst is npz",
         },
         "src": {
             "type": str, "metavar": "src",

@@ -126,7 +126,7 @@ $ ybdata validate fixtures/mydata
 This should print out a table of both required and optional items for validation, and the validation status should be listed at the bottom. Once validated, convert the dataset into a package:
 
 ```
-$ ybdata convert fixtures/mydata
+$ ybdata package fixtures/mydata
 ```
 
 By default this will create a package in `uploads/mydata.zip` and update the `uploads/manifest.json` with the package and signature information. Note if you're updating a previously created dataset, you can use the `-f` flag to overwrite the old data and create a new package.
