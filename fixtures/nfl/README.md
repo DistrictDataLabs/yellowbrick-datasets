@@ -51,5 +51,5 @@ The dataset consists of an aggregate of all relevant statistics for eligible rec
 
 _Redistributed with the permission of Sports Reference LLC on June 11, 2019 via email._
 
-Sports Reference LLC, “2018 NFL Receiving,” Pro-Football-Reference.com - Pro Football Statistics and History.
+Sports Reference LLC, "2018 NFL Receiving," Pro-Football-Reference.com - Pro Football Statistics and History.
 [Online]. Available: https://www.pro-football-reference.com/years/2018/receiving.htm. [Accessed: 18-Jun-2019]
