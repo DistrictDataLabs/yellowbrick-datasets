@@ -1,7 +1,7 @@
 ## App Requirements
 boto3==1.9.71
 commis==0.4
-numpy==1.16.1
+numpy==1.22.0
 pandas==0.23.4
 tabulate==0.8.2
 tqdm==4.28.1
